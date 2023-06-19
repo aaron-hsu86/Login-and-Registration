@@ -27,6 +27,7 @@ def registration():
         flash('Email is already registered', 'registration')
         return redirect('/')
     id = email_model.Emails.save(request.form)
+    session['id'] = id
     return redirect(f'/dashboard/{id}')
 
 @app.route('/login', methods=['post'])
