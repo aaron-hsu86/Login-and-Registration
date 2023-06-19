@@ -110,6 +110,20 @@ class Emails:
         if data['password'] != data['confirm_password']:
             flash('Password does not match', 'registration')
             is_valid = False
+        # password check to have 1 number and 1 uppercase letter
+        upper = False
+        digit = False
+        for i in data['password']:
+            if i.isupper():
+                upper = True
+            elif i.isdigit():
+                digit = True
+        if not upper:
+            flash('Password should include one upper-case letter', 'registration')
+            is_valid = False
+        if not digit:
+            flash('Password should include one number', 'registration')
+            is_valid = False
         return is_valid
 
     @classmethod
