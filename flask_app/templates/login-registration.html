@@ -14,6 +14,17 @@
     }
 </style>
 <body>
+    <div class="d-flex justify-content-center text-center">
+        {% with messages = get_flashed_messages(category_filter=['user']) %}
+        {% if messages %}
+        <div class="error-msg p-3">
+        {% for message in messages %}
+            <p>{{message}}</p>
+            {% endfor %}
+        </div>
+        {% endif %}
+        {% endwith %}
+    </div>
     <div class="d-flex justify-content-evenly">
         <div class="bg-dark text-light col-3 p-5">
             {% with messages = get_flashed_messages(category_filter=['registration']) %}

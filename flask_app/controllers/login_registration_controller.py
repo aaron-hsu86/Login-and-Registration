@@ -7,8 +7,12 @@ app.secret_key = "secret-key"
 def main_page():
     return render_template('login-registration.html')
 
+# success page
 @app.route('/dashboard/<int:id>')
 def dashboard(id):
+    if 'id' not in session:
+        flash('Please log in page', 'user')
+        return redirect('/')
     user = email_model.Emails.get_one({'id':id})
     print(user)
     return render_template('dashboard.html', user = user)
@@ -41,6 +45,8 @@ def login_check():
     else:
         flash('Invalid email/password combination', 'login')
         return redirect('/')
+    
+    session['id'] = id
     return redirect(f'/dashboard/{id}')
 
 @app.route('/logout')
