@@ -133,7 +133,13 @@ class Emails:
         if results:
             return True
         return False
-        
+        # check if we return a match from db
+        if len(results)< 1:
+            # if no match, result len is < 1, return false
+            return False
+        # else we return the cls(returned user info)
+        return cls(result[0])
+
     @staticmethod
     def validate_email( email ):
         is_valid = True
